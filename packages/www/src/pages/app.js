@@ -1,11 +1,17 @@
 import React, { useContext } from "react";
+import { Router } from "@reach/router";
 import Link from "gatsby";
-import { Container, Heading, Button, Flex, NavLink } from "theme-ui";
 import { IdentityContext } from "../../identity-context";
+import { Container, Heading, Button, Flex, NavLink } from "theme-ui";
 
-export default props => {
-  debugger;
-  const { user, identity: netlifyIdentity } = useContext(IdentityContext);
+let Dash = () => {
+  const { user } = useContext(IdentityContext);
+
+  return <div>Dash hasUser: {user && user.user_metadata.full_name}</div>;
+};
+
+let DashLoggedOut = props => {
+  const { identity: netlifyIdentity, user } = useContext(IdentityContext);
   return (
     <Container>
       <Flex as="nav">
@@ -33,5 +39,21 @@ export default props => {
         </Button>
       </Flex>
     </Container>
+  );
+};
+
+export default props => {
+  const { user } = useContext(IdentityContext);
+  if (!user) {
+    return (
+      <Router>
+        <DashLoggedOut path="/app" />
+      </Router>
+    );
+  }
+  return (
+    <Router>
+      <Dash path="/app" />
+    </Router>
   );
 };
