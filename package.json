@@ -1,0 +1,12 @@
+{
+  "name": "serverless-todo-fauna",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:odm275/serverless-todo-fauna.git",
+  "author": "odm275 <pomejia@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces":[
+    "packages/*"
+  ]
+}
